@@ -87,13 +87,24 @@ async function handleForce() {
   if (type == "twopart") {
     const setup = body.setup;
     const delivery = body.delivery;
+
+    const pSetup = document.createElement("p");
+    pSetup.innerText = setup;
+    pSetup.classList.add("duck");
+    messagesContainer.appendChild(pSetup);
+
+    const pDelivery = document.createElement("p");
+    pDelivery.innerText = delivery;
+    pDelivery.classList.add("duck");
+    messagesContainer.appendChild(pDelivery);
   } else {
     const joke = body.joke;
+
+    const pJoke = document.createElement("p");
+    pJoke.innerText = joke;
+    pJoke.classList.add("duck");
+    messagesContainer.appendChild(pJoke);
   }
-
-  // 2 todo: Create the new P element
-
-  // 3 todo: Push that new P element to the DOM.
 }
 
 forceButton.addEventListener("click", handleForce);
