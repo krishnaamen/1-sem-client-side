@@ -1,0 +1,89 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid darkblue;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 15px;
+}
+
+.bottom {
+  border-top: 1px solid darkblue;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+button {
+  margin-left: 10px;
+  min-height: 30px;
+  padding: 5px;
+  width: 60px;
+  background-color: darkblue;
+  color: aliceblue;
+  border: none;
+  border-radius: 5px;
+}
+
+input {
+  height: 30px;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 15px;
+}
+
+.messages p {
+  color: aliceblue;
+  background-color: darkblue;
+  padding: 5px;
+  max-width: 50%;
+  margin-left: 50%;
+  border-radius: 5px;
+}
+
+.messages p.duck {
+  color: darkblue;
+  background-color: aliceblue;
+  padding: 5px;
+  max-width: 50%;
+  border-radius: 5px;
+  margin-left: 0%;
+  border: 1px solid darkblue;
+}
+
+.name-input {
+  margin-right: 15px;
+}
+
+.name-input > label {
+  margin-right: 5px;
+}
