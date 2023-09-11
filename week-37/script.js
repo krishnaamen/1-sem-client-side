@@ -3,6 +3,7 @@ const inputField = document.querySelector("#input-field");
 const messagesContainer = document.querySelector(".messages");
 const nameInput = document.querySelector("#my-name");
 const forceButton = document.querySelector("#force");
+const sendForm = document.querySelector("#send-form");
 
 function handleNameInput() {
   console.log("Hello from name input function");
@@ -21,9 +22,28 @@ function handleNameInput() {
 nameInput.addEventListener("change", handleNameInput);
 
 // Simplified version from last week
-function handleClick() {
+async function handleClick(event) {
+  event.preventDefault();
   // Get the user message
   const message = inputField.value;
+  const timestamp = newDateInRequestedFormat();
+
+  const obj = {
+    message,
+    timestamp,
+  };
+
+  const response = await saveToFirebase(obj);
+
+  if (response.status > 499) {
+    alert("Sorry, server not working");
+  } else if (response.status > 399) {
+    alert("Sorry, u fucked up.");
+  } else {
+    // Everything went ok.
+    const body = await response.json();
+    console.log(body);
+  }
 
   // Create new p element
   const newP = document.createElement("p");
@@ -36,7 +56,19 @@ function handleClick() {
   messagesContainer.appendChild(newP);
 }
 
-sendButton.addEventListener("click", handleClick);
+async function saveToFirebase(message) {
+  const response = await fetch(
+    "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/mr-duck/mtnl.json",
+    {
+      method: "POST",
+      body: JSON.stringify(message),
+    }
+  );
+  console.log(response);
+  return response;
+}
+
+sendForm.addEventListener("submit", handleClick);
 
 // Format: DD/MM/YYYY, hh:mm
 function newDateInRequestedFormat() {
