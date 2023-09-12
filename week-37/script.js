@@ -35,25 +35,21 @@ async function handleClick(event) {
 
   const response = await saveToFirebase(obj);
 
-  if (response.status > 499) {
-    alert("Sorry, server not working");
-  } else if (response.status > 399) {
-    alert("Sorry, u fucked up.");
-  } else {
-    // Everything went ok.
+  if (response.ok) {
     const body = await response.json();
-    console.log(body);
+    // Create new p element
+    const newP = document.createElement("p");
+
+    // Set the inner text of the new p element
+    newP.innerText = message;
+    newP.title = newDateInRequestedFormat();
+    newP.id = body.name;
+
+    // Append the new p element to the DOM.
+    messagesContainer.appendChild(newP);
+  } else {
+    alert("Sorry, my site is not working. Come back later.");
   }
-
-  // Create new p element
-  const newP = document.createElement("p");
-
-  // Set the inner text of the new p element
-  newP.innerText = message;
-  newP.title = newDateInRequestedFormat();
-
-  // Append the new p element to the DOM.
-  messagesContainer.appendChild(newP);
 }
 
 async function saveToFirebase(message) {
@@ -68,7 +64,32 @@ async function saveToFirebase(message) {
   return response;
 }
 
+async function getFromFirebase() {
+  const response = await fetch(
+    "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/mr-duck/mtnl.json"
+  );
+  console.log(response);
+
+  const body = await response.json();
+  console.log(body);
+
+  const toArray = Object.values(body);
+  console.log(toArray);
+  return toArray;
+}
+
 sendForm.addEventListener("submit", handleClick);
+
+function toHtmlElements(inputs) {
+  // Goal: Transforms Array of Objects into Array of HTML Elements.
+  const elements = inputs.map((input) => {
+    const p = document.createElement("p");
+    p.innerHTML = input.message;
+    p.title = input.timestamp;
+    return p;
+  });
+  return elements;
+}
 
 // Format: DD/MM/YYYY, hh:mm
 function newDateInRequestedFormat() {
@@ -140,3 +161,57 @@ async function handleForce() {
 }
 
 forceButton.addEventListener("click", handleForce);
+
+window.addEventListener("load", async () => {
+  const array = await getFromFirebase();
+
+  const elements = toHtmlElements(array);
+  console.log(elements);
+
+  messagesContainer.append(...elements);
+});
+
+const imageToBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (e) => reject(e);
+  });
+
+function base64ToImage(base64) {
+  var image = new Image();
+  image.src = base64;
+  return image;
+}
+
+const imageInput = document.querySelector("#image-upload");
+const saveImage = document.querySelector("#save-image");
+
+saveImage.addEventListener("click", async () => {
+  console.log(imageInput);
+  const test = imageInput.files[0];
+  console.log(test);
+  const base64 = await imageToBase64(test);
+
+  const response = await fetch(
+    "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/images/mtnl.json",
+    {
+      method: "PUT",
+      body: JSON.stringify(base64),
+    }
+  );
+  const body = await response.json();
+  console.log(response);
+  console.log(body);
+});
+
+window.addEventListener("load", async () => {
+  const response = await fetch(
+    "https://web-1st-semester-default-rtdb.europe-west1.firebasedatabase.app/images/mtnl.json"
+  );
+  const body = await response.json();
+  console.log(body);
+  const imageElement = base64ToImage(body);
+  document.body.append(imageElement);
+});
