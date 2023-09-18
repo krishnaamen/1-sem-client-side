@@ -1,0 +1,11 @@
+.error {
+  border: 1px solid red;
+}
+
+error-message {
+  visibility: hidden;
+}
+
+input.error + error-message {
+  visibility: visible;
+}
