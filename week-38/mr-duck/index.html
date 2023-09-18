@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mr. Duck</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <style></style>
+    <script src="script.js" defer type="module"></script>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img
+          width="60px"
+          src="https://cdn.shoplightspeed.com/shops/638694/files/25409427/business-man-rubber-duck.jpg"
+        />
+        <h1>Mr. Duck</h1>
+        <button id="force">Force answer!</button>
+      </div>
+      <div class="name-input">
+        <label for="my-name">Please tell me your name: </label>
+        <input type="text" id="my-name" />
+        <input type="file" id="image-upload" />
+        <button id="save-image">Save image</button>
+      </div>
+    </header>
+    <main>
+      <div class="messages"></div>
+    </main>
+    <div class="bottom">
+      <form class="input-fields" id="send-form">
+        <input
+          id="input-field"
+          type="text"
+          placeholder="Type your message here..."
+        />
+        <button id="send-button" type="submit">Send</button>
+      </form>
+    </div>
+  </body>
+</html>
