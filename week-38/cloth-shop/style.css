@@ -9,3 +9,13 @@ error-message {
 input.error + error-message {
   visibility: visible;
 }
+
+.clothing-article {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.clothing-article p {
+  margin: 0;
+}
