@@ -1,0 +1,26 @@
+.all-classes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 0;
+  justify-content: space-evenly;
+}
+
+.class-card {
+  padding: 16px;
+  border: 1px solid var(--primary-accent);
+  position: relative;
+  width: 375px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.corner {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}

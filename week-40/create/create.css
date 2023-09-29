@@ -1,0 +1,23 @@
+.basic-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.basic-form > div {
+  width: 250px;
+}
+
+.basic-form label {
+  width: 150px;
+  display: inline-block;
+}
+
+.basic-form input {
+  width: 250px;
+}
+
+.basic-form input[type="checkbox"] {
+  width: fit-content;
+}
