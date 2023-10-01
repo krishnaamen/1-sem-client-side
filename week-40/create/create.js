@@ -1,4 +1,4 @@
-import { postClass } from "../firebase-api.js";
+import { postClass } from "../api/firebase-api.js";
 
 const FORM = document.querySelector("#create-class-form");
 

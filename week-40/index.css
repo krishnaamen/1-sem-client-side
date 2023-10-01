@@ -23,4 +23,16 @@
   position: absolute;
   top: 15px;
   right: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.title-container {
+  width: 100%;
+  text-decoration: none;
+  min-height: 125px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

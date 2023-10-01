@@ -1,4 +1,4 @@
-import { getOneClass } from "../firebase-api.js";
+import { getOneClass } from "../api/firebase-api.js";
 
 window.addEventListener("load", async () => {
   const id = window.location.search.split("=")[1];
