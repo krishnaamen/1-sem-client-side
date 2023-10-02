@@ -4,16 +4,20 @@ import { deleteClass } from "./api/firebase-api.js";
  * @param {*} oneClass: classYear, id, international, name, studyLine
  * @returns
  */
-export default function createClassElement(oneClass) {
+export default function createClassElement(oneClass, role) {
   // Overall all div
   const container = document.createElement("div");
   container.classList.add("class-card");
   container.id = oneClass.id;
 
   const titleDiv = createTitle(oneClass);
-  const buttonsDiv = createCornerButtons(oneClass, container);
 
-  container.append(buttonsDiv, titleDiv);
+  if (role === "teacher") {
+    const buttonsDiv = createCornerButtons(oneClass, container);
+    container.append(buttonsDiv);
+  }
+
+  container.append(titleDiv);
 
   return container;
 }
