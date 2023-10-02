@@ -13,12 +13,15 @@ form.addEventListener("submit", async (event) => {
       data.get("password"),
       data.get("confirm-password")
     );
+    console.log(response);
+    const body = await response.json();
+    console.log(body);
 
     localStorage.setItem("userObject", JSON.stringify(response));
 
     console.log(response);
     // We are redirecting to index page
-    window.location.href = "/week-40/";
+    //window.location.href = "/week-40/";
   } catch (error) {
     console.log("error happened: ", error);
   }

@@ -1,15 +1,17 @@
 // All the code related to authentication of our users.
 
+const authAPI =
+  "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDov5v-0OIqf3JbTINyc-yJdt4OX91sVdY";
+
+/*
 // For now, it is just a Mock.
+This is the mocked version of the createLogin functionality:
 
 const mockUserObject = {
   userId: 1,
   role: "student",
   token: "eyASDklnweinlkjsdfljsdflkjsfdflnksdkljn",
 };
-
-/*
-This is the mocked version of the createLogin functionality:
 
 export async function createLogin(email, password, confirm) {
   // Do something
@@ -23,6 +25,21 @@ export async function createLogin(email, password, confirm) {
   });
 }
 */
+
+export async function createLogin(email, password, confirm) {
+  const response = fetch(authAPI, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      returnSecureToken: true,
+    }),
+  });
+  return response;
+}
 
 export async function login() {
   // Do something
